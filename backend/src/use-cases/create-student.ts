@@ -2,7 +2,7 @@ import {
   StudentEmailAlreadyExistsError,
   StudentRaAlreadyExistsError,
 } from "@/errors";
-import { StudentRepository } from "@/repository/student-repository";
+import { IStudentRepository } from "@/repository/student-repository";
 
 interface CreateStudentUseCaseRequest {
   name: string;
@@ -12,7 +12,7 @@ interface CreateStudentUseCaseRequest {
 }
 
 export class CreateStudentUseCase {
-  constructor(private studentsRepository: StudentRepository) {}
+  constructor(private studentsRepository: IStudentRepository) {}
 
   async execute({ name, email, cpf, ra }: CreateStudentUseCaseRequest) {
     const studentWithSameEmail = await this.studentsRepository.findByEmail(
@@ -29,11 +29,13 @@ export class CreateStudentUseCase {
       throw new StudentRaAlreadyExistsError();
     }
 
-    await this.studentsRepository.create({
+    const student = await this.studentsRepository.create({
       name,
       email,
       cpf,
       ra,
     });
+
+    return { student };
   }
 }
