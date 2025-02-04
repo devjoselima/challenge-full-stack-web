@@ -7,7 +7,7 @@ import {
 } from "@/errors";
 import { makeCreateStudentUseCase } from "@/use-cases/factories";
 
-export const createStudentController = async (
+export const CreateStudentController = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
@@ -22,8 +22,9 @@ export const createStudentController = async (
 
   try {
     const createStudentUseCase = makeCreateStudentUseCase();
-
     await createStudentUseCase.execute({ name, email, cpf, ra });
+
+    return reply.code(201).send();
   } catch (error) {
     if (
       error instanceof StudentEmailAlreadyExistsError ||
@@ -34,6 +35,4 @@ export const createStudentController = async (
     }
     return reply.status(500).send();
   }
-
-  return reply.code(201).send();
 };
