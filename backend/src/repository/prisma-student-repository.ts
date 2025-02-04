@@ -11,6 +11,12 @@ export class PrismaStudentsRepository implements StudentRepository {
     return student;
   }
 
+  async getAll() {
+    const students = await prisma.student.findMany();
+
+    return students;
+  }
+
   async findByEmail(email: string) {
     const student = await prisma.student.findUnique({
       where: {
