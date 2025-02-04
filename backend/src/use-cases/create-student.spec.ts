@@ -7,13 +7,13 @@ import {
   StudentRaAlreadyExistsError,
 } from "@/errors";
 
-let createStudentRepository: InMemoryStudentRepository;
+let studentRepository: InMemoryStudentRepository;
 let sut: CreateStudentUseCase;
 
-describe("Create User Use Case", () => {
+describe("Create Student Use Case", () => {
   beforeEach(() => {
-    createStudentRepository = new InMemoryStudentRepository();
-    sut = new CreateStudentUseCase(createStudentRepository);
+    studentRepository = new InMemoryStudentRepository();
+    sut = new CreateStudentUseCase(studentRepository);
   });
 
   it("should create a new student", async () => {
