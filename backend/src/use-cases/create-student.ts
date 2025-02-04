@@ -1,4 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import {
+  StudentEmailAlreadyExistsError,
+  StudentRaAlreadyExistsError,
+} from "@/errors";
+import { StudentRepository } from "@/repository/student-repository";
 
 interface CreateStudentUseCaseRequest {
   name: string;
@@ -7,38 +11,29 @@ interface CreateStudentUseCaseRequest {
   ra: string;
 }
 
-export async function createStudentUseCase({
-  name,
-  email,
-  cpf,
-  ra,
-}: CreateStudentUseCaseRequest) {
-  const studentWithSameEmail = await prisma.student.findUnique({
-    where: {
-      email,
-    },
-  });
+export class CreateStudentUseCase {
+  constructor(private studentsRepository: StudentRepository) {}
 
-  const studentWithSameRa = await prisma.student.findUnique({
-    where: {
-      ra,
-    },
-  });
+  async execute({ name, email, cpf, ra }: CreateStudentUseCaseRequest) {
+    const studentWithSameEmail = await this.studentsRepository.findByEmail(
+      email
+    );
 
-  if (studentWithSameEmail) {
-    throw new Error("Email already in use");
-  }
+    if (studentWithSameEmail) {
+      throw new StudentEmailAlreadyExistsError();
+    }
 
-  if (studentWithSameRa) {
-    throw new Error("RA already in use");
-  }
+    const studentWithSameRa = await this.studentsRepository.findByRa(ra);
 
-  await prisma.student.create({
-    data: {
+    if (studentWithSameRa) {
+      throw new StudentRaAlreadyExistsError();
+    }
+
+    await this.studentsRepository.create({
       name,
       email,
       cpf,
       ra,
-    },
-  });
+    });
+  }
 }
