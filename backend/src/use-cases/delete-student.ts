@@ -1,4 +1,4 @@
-import { StudentRaDoesNotExistsError } from "@/errors";
+import { StudentNotFoundError } from "@/errors";
 import { IStudentRepository } from "@/repository/student-repository";
 
 interface DeleteStudentUseCaseParams {
@@ -11,7 +11,7 @@ export class DeleteStudentUseCase {
   async execute({ ra }: DeleteStudentUseCaseParams) {
     const existsRa = await this.studentsRepository.findByRa(ra);
     if (!existsRa) {
-      throw new StudentRaDoesNotExistsError();
+      throw new StudentNotFoundError();
     }
 
     const student = await this.studentsRepository.delete(ra);

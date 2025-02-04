@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 import { makeDeleteStudentUseCase } from "@/use-cases/factories";
-import { StudentRaDoesNotExistsError } from "@/errors";
+import { StudentNotFoundError } from "@/errors";
 
 export const DeleteStudentController = async (
   request: FastifyRequest,
@@ -23,7 +23,7 @@ export const DeleteStudentController = async (
 
     return reply.code(200).send({ deletedRa: deletedRa });
   } catch (error) {
-    if (error instanceof StudentRaDoesNotExistsError) {
+    if (error instanceof StudentNotFoundError) {
       return reply.code(400).send({ message: error.message });
     }
   }

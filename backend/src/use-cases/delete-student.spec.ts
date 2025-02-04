@@ -2,7 +2,7 @@ import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-stud
 import { beforeEach, describe, expect, it, test } from "vitest";
 import { DeleteStudentUseCase } from "./delete-student";
 import { CreateStudentUseCase } from "./create-student";
-import { StudentRaDoesNotExistsError } from "@/errors";
+import { StudentNotFoundError } from "@/errors";
 
 let studentRepository: InMemoryStudentRepository;
 let createStudentUseCase: CreateStudentUseCase;
@@ -30,9 +30,9 @@ describe("Delete Student Use Case", () => {
     }
   });
 
-  it("should throw StudentRaDoesNotExistsError if RA does not exists", async () => {
+  it("should throw StudentNotFoundError if RA does not exists", async () => {
     await expect(() => sut.execute({ ra: "54321" })).rejects.toBeInstanceOf(
-      StudentRaDoesNotExistsError
+      StudentNotFoundError
     );
   });
 });
