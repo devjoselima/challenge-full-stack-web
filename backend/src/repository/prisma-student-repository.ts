@@ -7,14 +7,20 @@ export class PrismaStudentsRepository implements IStudentRepository {
     const student = await prisma.student.create({
       data,
     });
-
     return student;
   }
 
   async getAll() {
     const students = await prisma.student.findMany();
-
     return students;
+  }
+
+  async delete(ra: string) {
+    return await prisma.student.delete({
+      where: {
+        ra,
+      },
+    });
   }
 
   async findByEmail(email: string) {
@@ -23,7 +29,6 @@ export class PrismaStudentsRepository implements IStudentRepository {
         email,
       },
     });
-
     return student;
   }
 
@@ -33,7 +38,6 @@ export class PrismaStudentsRepository implements IStudentRepository {
         ra,
       },
     });
-
     return student;
   }
 
@@ -43,7 +47,6 @@ export class PrismaStudentsRepository implements IStudentRepository {
         cpf,
       },
     });
-
     return student;
   }
 }
