@@ -19,12 +19,21 @@ export class InMemoryStudentRepository implements IStudentRepository {
     return student;
   }
 
+  async delete(ra: string) {
+    const deletedStudent = this.students.find((student) => student.ra === ra);
+    if (!deletedStudent) {
+      return null;
+    }
+
+    return deletedStudent;
+  }
+
   async findByEmail(email: string) {
     const student = this.students.find((item) => item.email === email);
     if (!student) {
       return null;
     }
-    return Promise.resolve(student);
+    return student;
   }
 
   async findByRa(ra: string) {
