@@ -36,4 +36,14 @@ export class PrismaStudentsRepository implements IStudentRepository {
 
     return student;
   }
+
+  async findByCpf(cpf: string) {
+    const student = await prisma.student.findUnique({
+      where: {
+        cpf,
+      },
+    });
+
+    return student;
+  }
 }

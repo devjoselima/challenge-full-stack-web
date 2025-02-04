@@ -2,6 +2,7 @@ import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-stud
 import { beforeEach, describe, expect, it, test } from "vitest";
 import { CreateStudentUseCase } from "./create-student";
 import {
+  StudentCpfAlreadyExistsError,
   StudentEmailAlreadyExistsError,
   StudentRaAlreadyExistsError,
 } from "@/errors";
@@ -69,5 +70,25 @@ describe("Create User Use Case", () => {
         cpf: "12345678900",
       })
     ).rejects.toBeInstanceOf(StudentRaAlreadyExistsError);
+  });
+
+  it("should not create a student with an existing CPF", async () => {
+    const existingcpf = "12345678900";
+
+    await sut.execute({
+      ra: "12345",
+      name: "John Doe",
+      email: "johndoe@example.com",
+      cpf: existingcpf,
+    });
+
+    await expect(() =>
+      sut.execute({
+        ra: "54321",
+        name: "Jane Doe",
+        email: "johndoe2@example.com",
+        cpf: existingcpf,
+      })
+    ).rejects.toBeInstanceOf(StudentCpfAlreadyExistsError);
   });
 });

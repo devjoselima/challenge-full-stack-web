@@ -35,4 +35,13 @@ export class InMemoryStudentRepository implements IStudentRepository {
     }
     return student;
   }
+
+  async findByCpf(cpf: string) {
+    const student = this.students.find((item) => item.cpf === cpf);
+
+    if (!student) {
+      return null;
+    }
+    return student;
+  }
 }
