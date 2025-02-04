@@ -1,4 +1,5 @@
 import {
+  StudentCpfAlreadyExistsError,
   StudentEmailAlreadyExistsError,
   StudentRaAlreadyExistsError,
 } from "@/errors";
@@ -27,6 +28,12 @@ export class CreateStudentUseCase {
 
     if (studentWithSameRa) {
       throw new StudentRaAlreadyExistsError();
+    }
+
+    const studentWithSameCpf = await this.studentsRepository.findByCpf(cpf);
+
+    if (studentWithSameCpf) {
+      throw new StudentCpfAlreadyExistsError();
     }
 
     const student = await this.studentsRepository.create({

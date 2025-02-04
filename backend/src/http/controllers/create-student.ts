@@ -1,7 +1,10 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
-import { StudentEmailAlreadyExistsError } from "@/errors/student-email-already-exists";
-import { StudentRaAlreadyExistsError } from "@/errors";
+import {
+  StudentRaAlreadyExistsError,
+  StudentEmailAlreadyExistsError,
+  StudentCpfAlreadyExistsError,
+} from "@/errors";
 import { makeCreateStudentUseCase } from "@/use-cases/factories";
 
 export const createStudentController = async (
@@ -24,7 +27,8 @@ export const createStudentController = async (
   } catch (error) {
     if (
       error instanceof StudentEmailAlreadyExistsError ||
-      error instanceof StudentRaAlreadyExistsError
+      error instanceof StudentRaAlreadyExistsError ||
+      error instanceof StudentCpfAlreadyExistsError
     ) {
       return reply.status(409).send({ message: error.message });
     }
