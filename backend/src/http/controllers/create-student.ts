@@ -1,7 +1,8 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import { createStudentUseCase } from "@/use-cases/create-student";
+import { StudentEmailAlreadyExistsError } from "@/errors/student-email-already-exists";
+import { StudentRaAlreadyExistsError } from "@/errors";
+import { makeCreateStudentUseCase } from "@/use-cases/factories";
 
 export const createStudentController = async (
   request: FastifyRequest,
@@ -17,9 +18,17 @@ export const createStudentController = async (
   const { name, email, cpf, ra } = createStudentBodySchema.parse(request.body);
 
   try {
-    await createStudentUseCase({ name, email, cpf, ra });
-  } catch {
-    return reply.status(400).send();
+    const createStudentUseCase = makeCreateStudentUseCase();
+
+    await createStudentUseCase.execute({ name, email, cpf, ra });
+  } catch (error) {
+    if (
+      error instanceof StudentEmailAlreadyExistsError ||
+      error instanceof StudentRaAlreadyExistsError
+    ) {
+      return reply.status(409).send({ message: error.message });
+    }
+    return reply.status(500).send();
   }
 
   return reply.code(201).send();
