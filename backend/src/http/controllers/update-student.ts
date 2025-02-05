@@ -22,9 +22,9 @@ export const UpdateStudentController = async (
 
   try {
     const updateStudentUseCase = makeUpdateStudentUseCase();
-    await updateStudentUseCase.execute({ ra, name, email });
+    const updatedStudent = await updateStudentUseCase.execute({ ra, name, email });
 
-    return reply.status(200).send();
+    return reply.status(200).send(updatedStudent);
   } catch (error) {
     if (error instanceof StudentNotFoundError) {
       return reply.status(404).send({ message: error.message });
