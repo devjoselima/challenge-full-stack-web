@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import { StudentEmailAlreadyExistsError, StudentNotFoundError } from "@/errors";
 import { makeUpdateStudentUseCase } from "@/use-cases/factories";
 
@@ -14,7 +14,8 @@ export const UpdateStudentController = async (
   const updateStudentBodySchema = z.object({
     name: z.string().optional(),
     email: z.string().email().optional(),
-  });
+  })
+  .strict();
 
   const { ra } = updateStudentParamsSchema.parse(request.params);
   const { name, email } = updateStudentBodySchema.parse(request.body);
