@@ -7,8 +7,8 @@ export const PaginateStudentsController = async (
   reply: FastifyReply
 ) => {
   const paginateStudentsParamsSchema = z.object({
-    page: z.string(),
-    itemsPerPage: z.string(),
+    page: z.string().transform((val) => Number(val)),
+    itemsPerPage: z.string().transform((val) => Number(val)),
   })
   const { page, itemsPerPage } = paginateStudentsParamsSchema.parse(request.query);
 
@@ -18,9 +18,9 @@ export const PaginateStudentsController = async (
 
   try {
     const paginateStudentsUseCase = makePaginateStudentsUseCase();
-    const students = await paginateStudentsUseCase.execute(page, itemsPerPage);
+    const {students, total} = await paginateStudentsUseCase.execute(page, itemsPerPage);
 
-    return reply.code(200).send({ students, page, itemsPerPage });
+    return reply.code(200).send({ students, page, itemsPerPage, total });
     
   } catch (error) {
     return reply.code(500).send();

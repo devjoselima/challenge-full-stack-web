@@ -18,6 +18,11 @@ export class PrismaStudentsRepository implements IStudentRepository {
     return students;
   }
 
+  async count() {
+    const total = await prisma.student.count();
+    return total;
+  }
+
   async delete(ra: string) {
     return await prisma.student.delete({
       where: {
