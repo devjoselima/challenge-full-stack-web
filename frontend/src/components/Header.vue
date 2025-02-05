@@ -9,6 +9,6 @@
 
 <script lang="ts" setup>
   import { ref } from "vue";
-  import SideBar from '@/components/SideBar.vue'
+  import SideBar from '@/components/side-bar.vue'
   const isDrawerOpen = ref(true)
 </script>

@@ -7,12 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    DeleteStudentModa: typeof import('./src/components/delete-student-moda.vue')['default']
+    DeleteStudentModal: typeof import('./src/components/delete-student-modal.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SideBar: typeof import('./src/components/SideBar.vue')['default']
-    StudentTable: typeof import('./src/components/StudentTable.vue')['default']
-    StudentToolbar: typeof import('./src/components/StudentToolbar.vue')['default']
+    SideBar: typeof import('./src/components/side-bar.vue')['default']
+    StudentTable: typeof import('./src/components/student-table.vue')['default']
+    StudentToolbar: typeof import('./src/components/student-toolbar.vue')['default']
   }
 }
