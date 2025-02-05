@@ -10,6 +10,7 @@ export class InMemoryStudentRepository implements IStudentRepository {
 
     return this.students.slice(startIndex, endIndex);
   }
+  
 
   async create(data: Prisma.StudentCreateInput) {
     const student = {
@@ -20,6 +21,10 @@ export class InMemoryStudentRepository implements IStudentRepository {
     };
     this.students.push(student);
     return student;
+  }
+
+  async count() {
+    return this.students.length;
   }
 
   async delete(ra: string) {
