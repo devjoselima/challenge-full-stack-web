@@ -4,8 +4,11 @@ import { IStudentRepository } from "../student-repository";
 export class InMemoryStudentRepository implements IStudentRepository {
   public students: Student[] = [];
 
-  async getAll() {
-    return this.students;
+  async paginate(page: number, perPage: number) {
+    const startIndex = (page - 1) * perPage;
+    const endIndex = page * perPage;
+
+    return this.students.slice(startIndex, endIndex);
   }
 
   async create(data: Prisma.StudentCreateInput) {
