@@ -1,7 +1,7 @@
 import { Prisma, Student } from "@prisma/client";
 
 export interface IStudentRepository {
-  getAll(): Promise<Student[]>;
+  paginate(page: number, itemsPerPage: number): Promise<Student[]>;
   create(data: Prisma.StudentCreateInput): Promise<Student>;
   delete(ra: string): Promise<Student | null>;
   update(ra:string, updateDataParams: Prisma.StudentUpdateInput): Promise<Student | null>;
