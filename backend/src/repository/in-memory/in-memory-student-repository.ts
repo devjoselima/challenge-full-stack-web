@@ -10,7 +10,7 @@ export class InMemoryStudentRepository implements IStudentRepository {
 
   async create(data: Prisma.StudentCreateInput) {
     const student = {
-      ra: "123456",
+      ra: data.ra,
       name: data.name,
       email: data.email,
       cpf: data.cpf,
@@ -26,6 +26,17 @@ export class InMemoryStudentRepository implements IStudentRepository {
     }
 
     return deletedStudent;
+  }
+
+  async update(ra: string, data: { name?: string; email?: string }) {
+    const student = await this.findByRa(ra);
+    if (!student) {
+      return null;
+    }
+    if (data.name) student.name = data.name;
+    if (data.email) student.email = data.email;
+
+    return student;
   }
 
   async findByEmail(email: string) {
