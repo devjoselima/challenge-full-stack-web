@@ -23,6 +23,15 @@ export class PrismaStudentsRepository implements IStudentRepository {
     });
   }
 
+  async update(ra: string, data: Prisma.StudentUpdateInput) {
+    return await prisma.student.update({
+      where: {
+        ra,
+      },
+      data,
+    });
+  }
+
   async findByEmail(email: string) {
     const student = await prisma.student.findUnique({
       where: {
