@@ -1,22 +1,19 @@
 import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
 import { beforeEach, describe, expect, it, test } from "vitest";
 import { DeleteStudentUseCase } from "./delete-student";
-import { CreateStudentUseCase } from "./create-student";
 import { StudentNotFoundError } from "@/errors";
 
 let studentRepository: InMemoryStudentRepository;
-let createStudentUseCase: CreateStudentUseCase;
 let sut: DeleteStudentUseCase;
 
 describe("Delete Student Use Case", () => {
   beforeEach(() => {
     studentRepository = new InMemoryStudentRepository();
-    createStudentUseCase = new CreateStudentUseCase(studentRepository);
     sut = new DeleteStudentUseCase(studentRepository);
   });
 
   it("should delete a student", async () => {
-    await createStudentUseCase.execute({
+    await studentRepository.create({
       ra: "123456",
       name: "John Doe",
       email: "johndow@example.com",
