@@ -1,13 +1,14 @@
 <template>
   <v-container class="fill-height d-flex align-center justify-center" style="min-height: 100vh;">
     <v-card class="pa-4" width="600px">
-      <v-card-title>{{ isEdit ? 'Editar Aluno' : 'Registrar Novo Aluno' }}</v-card-title>
+      <v-card-title>{{ isEdit ? 'Editar Aluno' : 'Cadastrar Aluno' }}</v-card-title>
       <v-card-text>
         <v-form @submit.prevent="submitForm" :validation-schema="studentSchema" class="d-flex flex-column ga-3">
           <v-text-field
             label="Registro Acadêmico"
             v-model="ra"
             :error-messages="errors.ra"
+            :disabled="isEdit"
           />
           <v-text-field
             label="Nome"
@@ -23,7 +24,7 @@
             label="CPF"
             v-model="cpf"
             :error-messages="errors.cpf"
-           
+            :disabled="isEdit"
           />
           <div class="d-flex">
             <v-btn color="primary" type="submit">Salvar</v-btn>
@@ -36,16 +37,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from "vue-router";
+import { ref } from 'vue';
+import { useRouter, useRoute } from "vue-router";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { z } from "zod";
 import { createStudent } from "@/api/create-student";
+import { updateStudent } from "@/api/update-student";
 
-const isEdit = ref(true)
+const router = useRouter();
+const route = useRoute();
+
+const isEdit = ref(!!route.query.ra);
 
 const studentSchema = toTypedSchema(
   z.object({
@@ -59,6 +64,12 @@ const studentSchema = toTypedSchema(
 
 const { handleSubmit, errors } = useForm({
   validationSchema: studentSchema,
+  initialValues: {
+    ra: route.query.ra || "",
+    name: route.query.name || "",
+    email: route.query.email || "",
+    cpf: route.query.cpf || "",
+  },
 });
 
 const { value: ra } = useField("ra");
@@ -66,15 +77,18 @@ const { value: name } = useField("name");
 const { value: email } = useField("email");
 const { value: cpf } = useField("cpf");
 
-const router = useRouter();
-
 const submitForm = handleSubmit(async (values) => {
   try {
-    await createStudent(values);
-    toast.success("Aluno criado com sucesso!");
+    if (isEdit.value) {
+      await updateStudent(values.ra, { name: values.name, email: values.email });
+      toast.success("Aluno atualizado com sucesso!");
+    } else {
+      await createStudent(values);
+      toast.success("Aluno criado com sucesso!");
+    }
     router.push("/");
   } catch (error) {
-    toast.error("Erro ao criar aluno");
+    toast.error("Erro ao salvar aluno");
   }
 });
 </script>

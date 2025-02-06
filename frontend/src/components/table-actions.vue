@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-center">
-    <v-icon size="small" class="me-2" color="primary">
+    <v-icon size="small" class="me-2" color="primary" @click="handleRedirectStudent(student)">
       mdi-pencil
     </v-icon>
 
@@ -19,6 +19,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { deleteStudent } from "@/api/delete-student";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -28,6 +29,7 @@ const props = defineProps({
   student: Object,
 });
 
+const router = useRouter();
 const emit = defineEmits(["refresh"]);
 
 const deleteModalIsOpen = ref(false);
@@ -47,5 +49,17 @@ const handleDeleteStudent = async () => {
   } catch (error) {
     toast.error("Erro ao excluir aluno");
   }
+};
+
+const handleRedirectStudent = (student) => {
+  router.push({
+    path: "/student",
+    query: {
+      ra: student.ra,
+      name: student.name,
+      email: student.email,
+      cpf: student.cpf,
+    }
+  });
 };
 </script>
