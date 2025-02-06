@@ -1,4 +1,3 @@
-import type { Student } from "@/@types/student";
 import { api } from "./axios"
 
 interface CreateStudentBody {
