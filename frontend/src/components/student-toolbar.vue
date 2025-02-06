@@ -10,17 +10,13 @@
       @keyup.enter="onSearch"
       style="max-width: 400px;"
     />
-    <v-btn color="primary" @click="$router.push('/new-student')">Cadastrar aluno</v-btn>
+    <v-btn color="primary" @click="$router.push('/student')">Cadastrar aluno</v-btn>
   </v-container>
 
 </template>
  
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
 const search = ref('');
 
 const onSearch = () => {
