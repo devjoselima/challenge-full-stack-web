@@ -10,8 +10,10 @@ export class PrismaStudentsRepository implements IStudentRepository {
     return student;
   }
 
-  async paginate(page: number, itemsPerPage: number) {
+  async paginate(page: number, itemsPerPage: number, ra: string) {
+    const filters = ra ? { ra: { contains: ra } } : {}
     const students = await prisma.student.findMany({
+      where: filters,
       skip: (page - 1) * itemsPerPage,
       take: itemsPerPage,
     });
