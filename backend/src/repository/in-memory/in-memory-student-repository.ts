@@ -4,11 +4,19 @@ import { IStudentRepository } from "../student-repository";
 export class InMemoryStudentRepository implements IStudentRepository {
   public students: Student[] = [];
 
-  async paginate(page: number, perPage: number) {
+  async paginate(page: number, perPage: number, ra?: string) {
+    let filteredStudents = this.students;
+
+    if (ra) {
+      filteredStudents = filteredStudents.filter((student) =>
+        student.ra.includes(ra)
+      );
+    }
+
     const startIndex = (page - 1) * perPage;
     const endIndex = page * perPage;
 
-    return this.students.slice(startIndex, endIndex);
+    return filteredStudents.slice(startIndex, endIndex);
   }
   
 
@@ -23,7 +31,10 @@ export class InMemoryStudentRepository implements IStudentRepository {
     return student;
   }
 
-  async count() {
+  async count(ra?: string) {
+    if(ra) {
+      return this.students.filter((student) => student.ra.includes(ra)).length;
+    }
     return this.students.length;
   }
 

@@ -66,4 +66,26 @@ describe("Paginate Students Use Case", () => {
     expect(students).toHaveLength(2);
     expect(total).toBe(2);
   });
+
+  it("should filter students by RA", async () => { 
+    const page = 1
+    const itemsPerPage = 10
+    const raFilter = "123"
+
+    const { students, total } = await sut.execute(page, itemsPerPage, raFilter)
+
+    expect(students).toHaveLength(1)
+    expect(total).toBe(1)
+  });
+
+  it("should return 0 students if RA filter does not match any student", async () => {
+    const page = 1
+    const itemsPerPage = 10
+    const raFilter = "999"
+
+    const { students, total } = await sut.execute(page, itemsPerPage, raFilter)
+
+    expect(students).toHaveLength(0)
+    expect(total).toBe(0)
+  })
 });

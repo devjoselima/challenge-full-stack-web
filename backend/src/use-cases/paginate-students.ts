@@ -5,7 +5,7 @@ export class PaginateStudentsUseCase {
 
   async execute(page: number, itemsPerPage: number, ra?: string) {
     const students = await this.studentsRepository.paginate(page, itemsPerPage, ra);
-    const total = await this.studentsRepository.count();
+    const total = await this.studentsRepository.count(ra);
 
     return {students, total};
   }

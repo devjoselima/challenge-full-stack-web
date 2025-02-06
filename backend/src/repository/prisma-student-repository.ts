@@ -20,8 +20,11 @@ export class PrismaStudentsRepository implements IStudentRepository {
     return students;
   }
 
-  async count() {
-    const total = await prisma.student.count();
+  async count(ra?: string) {
+    const filters = ra ? { ra: { contains: ra } } : {};
+    const total = await prisma.student.count({
+      where: filters,
+    });
     return total;
   }
 
