@@ -24,16 +24,18 @@ import { deleteStudent } from "@/api/delete-student";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import DeleteStudentModal from "@/components/delete-student-modal.vue";
+import { useStudentStore } from "@/store/studentStore";
+
+const deleteModalIsOpen = ref(false);
+const studentToDelete = ref(null);
+const router = useRouter();
+const studentStore = useStudentStore();
 
 const props = defineProps({
   student: Object,
 });
-
-const router = useRouter();
 const emit = defineEmits(["refresh"]);
 
-const deleteModalIsOpen = ref(false);
-const studentToDelete = ref(null);
 
 const openDeleteModal = (student) => {
   studentToDelete.value = student;
@@ -52,14 +54,7 @@ const handleDeleteStudent = async () => {
 };
 
 const handleRedirectStudent = (student) => {
-  router.push({
-    path: "/student",
-    query: {
-      ra: student.ra,
-      name: student.name,
-      email: student.email,
-      cpf: student.cpf,
-    }
-  });
+  studentStore.setStudent(student);
+  router.push("/student");
 };
 </script>

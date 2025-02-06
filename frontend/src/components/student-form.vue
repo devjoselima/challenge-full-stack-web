@@ -46,11 +46,13 @@ import "vue3-toastify/dist/index.css";
 import { z } from "zod";
 import { createStudent } from "@/api/create-student";
 import { updateStudent } from "@/api/update-student";
+import { useStudentStore } from '@/store/studentStore';
 
 const router = useRouter();
 const route = useRoute();
+const studentStore = useStudentStore();
 
-const isEdit = ref(!!route.query.ra);
+const isEdit = ref(!!studentStore.student);
 
 const studentSchema = toTypedSchema(
   z.object({
@@ -65,10 +67,10 @@ const studentSchema = toTypedSchema(
 const { handleSubmit, errors } = useForm({
   validationSchema: studentSchema,
   initialValues: {
-    ra: route.query.ra || "",
-    name: route.query.name || "",
-    email: route.query.email || "",
-    cpf: route.query.cpf || "",
+    ra: studentStore.student?.ra || "",
+    name: studentStore.student?.name || "",
+    email: studentStore.student?.email || "",
+    cpf: studentStore.student?.cpf || "",
   },
 });
 
