@@ -6,7 +6,7 @@
       :loading="loading"
       density="comfortable"
       class="elevation-2"
-      :items-per-page="itemsPerPage"
+      :items-per-page="pagination.itemsPerPage"
       hide-default-footer
     >
       <template v-slot:[`item.cpf`]="{ item }">
@@ -15,7 +15,6 @@
       <template v-slot:[`item.actions`]="{ item }">
         <TableActions :student="item" @refresh="fetchStudents" />
       </template>
-
     </v-data-table>
 
     <v-pagination
@@ -39,12 +38,13 @@ import { studentTableHeaders } from "@/utils/student-table-headers";
 
 import { paginateStudents } from "@/api/paginate-students.ts";
 
+const props = defineProps(["search"]);
 
 const students = ref([]);
 const loading = ref(false);
 const pagination = ref({
   page: 1,
-  itemsPerPage: 4,
+  itemsPerPage: 10,
 });
 const totalPages = ref(0);
 
@@ -54,6 +54,7 @@ const fetchStudents = async () => {
     const { students: response, total } = await paginateStudents({
       page: pagination.value.page,
       itemsPerPage: pagination.value.itemsPerPage,
+      ra: props.search || undefined,
     });
 
     students.value = response;
@@ -65,6 +66,7 @@ const fetchStudents = async () => {
   }
 };
 
-watch(() => pagination.value.page, fetchStudents);
+watch([() => pagination.value.page, () => props.search], fetchStudents, { immediate: true });
+
 onMounted(fetchStudents);
 </script>

@@ -4,6 +4,7 @@ import { api } from "./axios"
 interface PaginateStudentsQuery {
   page: number;
   itemsPerPage: number;
+  ra?: string
 }
 
 interface PaginateStudentResponse {
@@ -13,11 +14,12 @@ interface PaginateStudentResponse {
   total: number
 }
 
-export const paginateStudents = async ({page, itemsPerPage}: PaginateStudentsQuery) => {
+export const paginateStudents = async ({ page, itemsPerPage, ra }: PaginateStudentsQuery) => {
   const response = await api.get<PaginateStudentResponse>("/students", {
     params: {
       page,
-      itemsPerPage
+      itemsPerPage,
+      ra,
     }
   });
 
