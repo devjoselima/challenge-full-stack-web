@@ -1,7 +1,7 @@
+import { PasswordCompareAdapter } from "@/adapters/password-compare";
 import { InvalidCredentialsError } from "@/errors";
 import { IUserRepository } from "@/repository/user-repository";
 import { User } from "@prisma/client";
-import { compare } from "bcryptjs";
 
 interface AuthenticateUseCaseRequest {
   email: string;
@@ -13,7 +13,10 @@ interface AuthenticateUseCaseResponse {
 }
 
 export class AuthenticateUseCase {
-  constructor(private usersRepository: IUserRepository) {}
+  constructor(
+    private usersRepository: IUserRepository, 
+    private passwordCompare: PasswordCompareAdapter
+  ) {}
 
   async execute({ email, password }: AuthenticateUseCaseRequest): Promise<AuthenticateUseCaseResponse> {
     const user = await this.usersRepository.findByEmail(email);
@@ -22,7 +25,7 @@ export class AuthenticateUseCase {
       throw new InvalidCredentialsError();
     }
 
-    const doesPasswordMatches = await compare(password, user.password)
+    const doesPasswordMatches = await this.passwordCompare.execute(password, user.password);
 
     if(!doesPasswordMatches) {
       throw new InvalidCredentialsError();
