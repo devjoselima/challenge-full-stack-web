@@ -1,16 +1,28 @@
 import fastify from "fastify";
 import cors from '@fastify/cors'
-
+import fastifyJwt from '@fastify/jwt'
 import { appRoutes } from "./http/routes";
 import { ZodError } from "zod";
+import { env } from "./env";
+import { authMiddleware } from "./middleware/auth";
+
 export const app = fastify();
 
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+})
+
+app.addHook("onRequest", async (request, reply) => {
+  await authMiddleware(request, reply);
+})
+
 app.register(cors, {
-  origin: "http://localhost:3000",
+  origin: env.CORS_ORIGIN,
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 })
+
 app.register(appRoutes);
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof ZodError) {

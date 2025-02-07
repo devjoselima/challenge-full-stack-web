@@ -6,6 +6,7 @@ import {
   StudentCpfAlreadyExistsError,
 } from "@/errors";
 import { makeCreateStudentUseCase } from "@/use-cases/factories";
+import { authMiddleware } from "@/middleware/auth";
 
 export const CreateStudentController = async (
   request: FastifyRequest,

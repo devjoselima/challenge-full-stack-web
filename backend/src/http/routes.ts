@@ -4,7 +4,8 @@ import {
   CreateUserController,
   DeleteStudentController,
   PaginateStudentsController,
-  UpdateStudentController
+  UpdateStudentController,
+  AuthenticateController
 } from "./controllers/";
 
 export async function appRoutes(app: FastifyInstance) {
@@ -14,4 +15,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.delete("/students/:ra", DeleteStudentController);
 
   app.post("/register", CreateUserController)
+  app.post("/authenticate", AuthenticateController)
 }
