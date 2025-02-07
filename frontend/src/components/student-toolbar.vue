@@ -5,7 +5,6 @@
       label="Buscar por RA"
       variant="outlined"
       append-inner-icon="mdi-magnify"
-      clearable
       @input="$emit('update:search', $event.target.value)"
       @click:append-inner="$emit('update:search', search)"
       @keyup.enter="$emit('update:search', search)"
