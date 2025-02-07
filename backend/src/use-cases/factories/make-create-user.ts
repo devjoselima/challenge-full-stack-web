@@ -1,10 +1,11 @@
-import { PrismaStudentsRepository } from "@/repository/prisma-student-repository";
 import { PrismaUserRepository } from "@/repository/prisma-user-repository";
 import { CreateUserUseCase } from "../create-user";
+import { PasswordHasherAdapter } from "@/adapters/password-hasher";
 
 export const makeCreateUserUseCase = () => {
   const userRepository = new PrismaUserRepository();
-  const createUserUseCase = new CreateUserUseCase(userRepository);
+  const passwordHasher = new PasswordHasherAdapter();
+  const createUserUseCase = new CreateUserUseCase(userRepository, passwordHasher);
 
   return createUserUseCase;
 };

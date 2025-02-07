@@ -1,6 +1,6 @@
 import { UserAlreadyExistsError } from "@/errors/user-already-exists";
 import { IUserRepository } from "@/repository/user-repository";
-import { hash } from "bcryptjs";
+import { PasswordHasherAdapter } from "@/adapters/password-hasher";
 
 interface CreateUserBody {
   name: string;
@@ -9,7 +9,10 @@ interface CreateUserBody {
 }
 
 export class CreateUserUseCase {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+    private passwordHasher: PasswordHasherAdapter
+  ) {}
 
   async execute({ name, email, password }: CreateUserBody) {
     const userExists = await this.userRepository.findByEmail(email);
@@ -18,7 +21,7 @@ export class CreateUserUseCase {
       throw new UserAlreadyExistsError();
     }
 
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await this.passwordHasher.execute(password);
 
     const user = await this.userRepository.create({
       name,
