@@ -8,19 +8,19 @@ import { authMiddleware } from "./middleware/auth";
 
 export const app = fastify();
 
+app.register(cors, {
+  origin: env.CORS_ORIGIN,
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+})
+
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 })
 
 app.addHook("onRequest", async (request, reply) => {
   await authMiddleware(request, reply);
-})
-
-app.register(cors, {
-  origin: env.CORS_ORIGIN,
-  methods: ["GET", "POST", "PATCH", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
 })
 
 app.register(appRoutes);
