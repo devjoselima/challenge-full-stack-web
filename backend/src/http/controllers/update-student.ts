@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { StudentEmailAlreadyExistsError, StudentNotFoundError } from "@/errors";
 import { makeUpdateStudentUseCase } from "@/use-cases/factories";
 
