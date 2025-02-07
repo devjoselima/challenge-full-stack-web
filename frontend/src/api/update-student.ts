@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/auth";
 import { api } from "./axios"
 
 interface UpdateStudentBody {
@@ -6,6 +7,14 @@ interface UpdateStudentBody {
 }
 
 export const updateStudent = async (ra: string, body: UpdateStudentBody) => {
-  const response = await api.patch(`/students/${ra}`, body);
-  return response.data
+  const authStore = useAuthStore();
+  const token = authStore.token;
+
+  const response = await api.patch(`/students/${ra}`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
 }

@@ -1,5 +1,6 @@
 import type { Student } from "@/@types/student";
 import { api } from "./axios"
+import { useAuthStore } from "@/store/auth";
 
 interface PaginateStudentsQuery {
   page: number;
@@ -15,11 +16,15 @@ interface PaginateStudentResponse {
 }
 
 export const paginateStudents = async ({ page, itemsPerPage, ra }: PaginateStudentsQuery) => {
+  const authStore = useAuthStore()
   const response = await api.get<PaginateStudentResponse>("/students", {
     params: {
       page,
       itemsPerPage,
       ra,
+    },
+    headers: {
+      Authorization: `Bearer ${authStore.token}`
     }
   });
 

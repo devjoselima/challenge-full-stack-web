@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/auth";
 import { api } from "./axios"
 
 interface DeleteStudentParams {
@@ -5,11 +6,18 @@ interface DeleteStudentParams {
 }
 
 interface DeleteStudentResponse {
-  deletedRa: string
+  deletedRa: string;
 }
 
 export const deleteStudent = async ({ ra }: DeleteStudentParams) => {
-  const response = await api.delete<DeleteStudentResponse>(`/students/${ra}`);
+  const authStore = useAuthStore();
+  const token = authStore.token;
 
-  return response.data
+  const response = await api.delete<DeleteStudentResponse>(`/students/${ra}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return response.data;
 }
