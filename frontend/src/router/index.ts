@@ -5,6 +5,7 @@
  */
 
 // Composables
+import { useAuthStore } from '@/store/auth'
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { routes } from 'vue-router/auto-routes'
 
@@ -26,6 +27,23 @@ router.onError((err, to) => {
   } else {
     console.error(err)
   }
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  const isAuthenticated = authStore.isAuthenticated
+  const loginPath = to.path === '/login'
+  const initialPath = to.path === '/'
+
+  if (loginPath && isAuthenticated) {
+    next('/')
+  }
+
+  if (initialPath && !isAuthenticated) {
+    next('/login')
+  }
+
+  return next()
 })
 
 router.isReady().then(() => {
