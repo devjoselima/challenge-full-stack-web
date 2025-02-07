@@ -23,6 +23,10 @@
             @click:append="togglePasswordVisibility"
           />
           <v-btn type="submit" color="primary" block>Cadastrar</v-btn>
+          <div class="text-center">
+            <span>Ja possui uma conta? </span>
+            <a href="/login">Entre agora!</a>
+          </div>
         </v-form>
       </v-card-text>
     </v-card>
