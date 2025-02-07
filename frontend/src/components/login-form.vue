@@ -16,6 +16,10 @@
             type="password"
           />
           <v-btn type="submit" color="primary" block>Entrar</v-btn>
+          <div class="text-center">
+            <span>Ainda não tem uma conta? </span>
+            <a href="/register">Crie uma agora!</a>
+          </div>
         </v-form>
       </v-card-text>
     </v-card>
