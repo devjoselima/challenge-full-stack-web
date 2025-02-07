@@ -28,7 +28,7 @@
             :disabled="isEdit"
           />
           <div class="d-flex">
-            <v-btn color="primary" type="submit">Salvar</v-btn>
+            <v-btn color="primary" type="submit" :disabled="!isAnyFieldDirty">Salvar</v-btn>
             <v-btn variant="text" @click="handleCancel">Cancelar</v-btn>
           </div>
         </v-form>
@@ -43,7 +43,7 @@
   import { cpfMask } from '@/utils/cpf-mask';
   import { useRouter } from 'vue-router';
 
-  const { isEdit, ra, name, email, cpf, errors, submitForm } = useStudentForm(); 
+  const { isEdit, ra, name, email, cpf, errors, submitForm, isAnyFieldDirty } = useStudentForm(); 
   const router = useRouter();
   const toastStore = useToastStore();
 

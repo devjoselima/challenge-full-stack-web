@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useField, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -18,22 +18,22 @@ export function useStudentForm() {
   const isEdit = ref(!!studentStore.student);
 
   const studentSchema = toTypedSchema(
-  z.object({
-    ra: z.string({ required_error: "O Registro Acadêmico é obrigatório" }),
-    name: z.string({ required_error: "O nome do aluno é obrigatório" }).min(3, "Nome deve ter pelo menos 3 caracteres"),
-    email: z.string({ required_error: "O email é obrigatório" }).email("E-mail inválido"),
-    cpf: z
-      .string({ required_error: "O CPF é obrigatório" }).min(11, "CPF inválido").max(11, "CPF inválido"),
-  })
-);
+    z.object({
+      ra: z.string({ required_error: "O Registro Acadêmico é obrigatório" }),
+      name: z.string({ required_error: "O nome do aluno é obrigatório" }).min(3, "Nome deve ter pelo menos 3 caracteres"),
+      email: z.string({ required_error: "O email é obrigatório" }).email("E-mail inválido"),
+      cpf: z
+        .string({ required_error: "O CPF é obrigatório" }).min(11, "CPF inválido").max(11, "CPF inválido"),
+    })
+  );
 
-  const { handleSubmit, errors } = useForm({
+  const { handleSubmit, errors, meta } = useForm({
     validationSchema: studentSchema,
     initialValues: {
-      ra: studentStore.student?.ra || "",
-      name: studentStore.student?.name || "",
-      email: studentStore.student?.email || "",
-      cpf: studentStore.student?.cpf || "",
+      ra: studentStore.student?.ra ?? undefined,
+      name: studentStore.student?.name ?? undefined,
+      email: studentStore.student?.email ?? undefined,
+      cpf: studentStore.student?.cpf ?? undefined,
     },
   });
 
@@ -41,6 +41,8 @@ export function useStudentForm() {
   const { value: name } = useField("name");
   const { value: email } = useField("email");
   const { value: cpf } = useField("cpf");
+  
+  const isAnyFieldDirty = computed(() => meta.value.dirty)
 
   const submitForm = handleSubmit(async (values) => {
     try {
@@ -57,5 +59,5 @@ export function useStudentForm() {
     }
   });
 
-  return { isEdit, ra, name, email, cpf, errors, submitForm };
+  return { isEdit, ra, name, email, cpf, errors, submitForm, isAnyFieldDirty };
 }
