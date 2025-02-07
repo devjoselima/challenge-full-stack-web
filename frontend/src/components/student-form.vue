@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-  import { useStudentForm } from '@/composables/useStudentForm';
+  import { useStudentForm } from '@/composables/use-student-form';
   import { useToastStore } from '@/store/toastStore';
   import { cpfMask } from '@/utils/cpf-mask';
   import { useRouter } from 'vue-router';

@@ -10,6 +10,7 @@ import { updateStudent } from "@/api/update-student";
 
 import { useStudentStore } from "@/store/studentStore";
 import { useToastStore } from "@/store/toastStore";
+import { AxiosError } from "axios";
 
 export function useStudentForm() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export function useStudentForm() {
       name: z.string({ required_error: "O nome do aluno é obrigatório" }).min(3, "Nome deve ter pelo menos 3 caracteres"),
       email: z.string({ required_error: "O email é obrigatório" }).email("E-mail inválido"),
       cpf: z
-        .string({ required_error: "O CPF é obrigatório" }).min(11, "CPF inválido").max(11, "CPF inválido"),
+        .string({ required_error: "O CPF é obrigatório" }).min(11, "CPF inválido"),
     })
   );
 
@@ -55,7 +56,22 @@ export function useStudentForm() {
       }
       router.push("/");
     } catch (error) {
-      toast.error("Erro ao salvar aluno");
+      if (error instanceof AxiosError && error.response) {
+        const errorMessage = error.response.data.message
+        if(errorMessage.includes("CPF")) {
+          toast.error("CPF já cadastrado");
+          return;
+        }     
+        if(errorMessage.includes("E-mail")) {
+          toast.error("E-mail já cadastrado");
+          return;
+        }     
+        if(errorMessage.includes("RA")) {
+          toast.error("Registro Acadêmico já cadastrado");
+          return;
+        }
+        toast.error("Erro ao salvar aluno");
+      }
     }
   });
 
