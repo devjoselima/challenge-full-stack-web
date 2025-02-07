@@ -18,7 +18,9 @@
             label="Senha"
             v-model="password"
             :error-messages="errors.password"
-            type="password"
+            :type="isPasswordVisible ? 'text' : 'password'" 
+            :append-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append="togglePasswordVisibility"
           />
           <v-btn type="submit" color="primary" block>Cadastrar</v-btn>
         </v-form>
@@ -28,6 +30,13 @@
 </template>
 
 <script setup>
+  import { ref } from "vue";
   import { useRegisterForm } from '@/composables/use-register-form';
+
+  const isPasswordVisible = ref(false);
   const { submitForm, errors, name, email, password } = useRegisterForm();
+
+  const togglePasswordVisibility = () => {
+    isPasswordVisible.value = !isPasswordVisible.value;
+  };
 </script>
