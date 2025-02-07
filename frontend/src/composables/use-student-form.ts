@@ -12,7 +12,7 @@ import { useStudentStore } from "@/store/studentStore";
 import { useToastStore } from "@/store/toastStore";
 import { AxiosError } from "axios";
 
-export function useStudentForm() {
+export const useStudentForm = () => {
   const router = useRouter();
   const studentStore = useStudentStore();
   const toastStore = useToastStore();
