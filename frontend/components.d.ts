@@ -10,6 +10,7 @@ declare module 'vue' {
     DeleteStudentModal: typeof import('./src/components/delete-student-modal.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    LoginForm: typeof import('./src/components/login-form.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideBar: typeof import('./src/components/side-bar.vue')['default']
