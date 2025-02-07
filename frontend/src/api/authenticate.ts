@@ -5,9 +5,13 @@ interface AuthenticateBody {
   password: string;
 }
 
+interface AuthenticateResponse {
+  name: string;
+  token: string;
+}
+
 export const authenticate = async ({ email, password }: AuthenticateBody) => {
-  
-  const response = await api.post('/authenticate', { email, password });
+  const response = await api.post<AuthenticateResponse>('/authenticate', { email, password });
 
   return response.data
 }

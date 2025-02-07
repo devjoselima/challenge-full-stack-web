@@ -17,7 +17,7 @@ export const AuthenticateController = async (request: FastifyRequest, reply: Fas
 
     const token = await reply.jwtSign({}, { sign: { sub: user.id, } })
 
-    reply.status(200).send({ token })
+    reply.status(200).send({ name: user.name, token })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(400).send({ message: error.message })
