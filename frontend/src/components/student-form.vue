@@ -3,7 +3,7 @@
     <v-card class="pa-4" width="600px">
       <v-card-title>{{ isEdit ? 'Editar Aluno' : 'Cadastrar Aluno' }}</v-card-title>
       <v-card-text>
-        <v-form @submit.prevent="submitForm" :validation-schema="studentSchema" class="d-flex flex-column ga-3">
+        <v-form @submit.prevent="submitForm" class="d-flex flex-column ga-3">
           <v-text-field
             label="Registro Acadêmico"
             v-model="ra"
@@ -23,6 +23,7 @@
           <v-text-field
             label="CPF"
             v-model="cpf"
+            @input="cpf = cpfMask($event.target.value)"
             :error-messages="errors.cpf"
             :disabled="isEdit"
           />
@@ -39,6 +40,7 @@
 <script setup>
   import { useStudentForm } from '@/composables/useStudentForm';
   import { useToastStore } from '@/store/toastStore';
+  import { cpfMask } from '@/utils/cpf-mask';
   import { useRouter } from 'vue-router';
 
   const { isEdit, ra, name, email, cpf, errors, submitForm } = useStudentForm(); 
