@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { authenticate } from '@/api/authenticate'
+import { authenticate } from '@/services/authenticate'
 import { toast } from 'vue3-toastify'
-import { register } from '@/api/register'
+import { register } from '@/services/register'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({

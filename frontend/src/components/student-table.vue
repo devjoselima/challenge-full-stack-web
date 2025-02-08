@@ -36,7 +36,7 @@ import TableActions from "@/components/table-actions.vue";
 import { formatCpf } from "@/utils/format-cpf";
 import { studentTableHeaders } from "@/utils/student-table-headers";
 
-import { paginateStudents } from "@/api/paginate-students.ts";
+import { paginateStudents } from "@/services/paginate-students.ts";
 
 const props = defineProps(["search"]);
 

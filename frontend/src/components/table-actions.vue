@@ -20,7 +20,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { deleteStudent } from "@/api/delete-student";
+import { deleteStudent } from "@/services/delete-student";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import DeleteStudentModal from "@/components/delete-student-modal.vue";

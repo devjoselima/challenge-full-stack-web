@@ -5,8 +5,8 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { toast } from "vue3-toastify";
 import { z } from "zod";
 
-import { createStudent } from "@/api/create-student";
-import { updateStudent } from "@/api/update-student";
+import { createStudent } from "@/services/create-student";
+import { updateStudent } from "@/services/update-student";
 
 import { useStudentStore } from "@/store/studentStore";
 import { useToastStore } from "@/store/toastStore";
