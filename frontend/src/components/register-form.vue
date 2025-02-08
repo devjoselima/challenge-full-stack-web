@@ -40,8 +40,8 @@
 
 <script setup>
   import { useRegisterForm } from '@/composables/use-register-form';
-  import { handleTogglePasswordVisibility} from '@/utils/toggle-password';
+  import { useTogglePasswordVisibility } from '@/composables/use-toggle-password';
   const { submitForm, errors, name, email, password } = useRegisterForm();
 
-  const { isPasswordVisible, togglePasswordVisibility} = handleTogglePasswordVisibility()
+  const { isPasswordVisible, togglePasswordVisibility} = useTogglePasswordVisibility()
 </script>

@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export function handleTogglePasswordVisibility() {
+export function useTogglePasswordVisibility() {
   const isPasswordVisible = ref(false);
 
   const togglePasswordVisibility = () => {

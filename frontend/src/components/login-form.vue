@@ -35,8 +35,8 @@
 
 <script setup>
   import { useLoginForm } from '@/composables/use-login-form';
-  import { handleTogglePasswordVisibility} from '@/utils/toggle-password';
+  import { useTogglePasswordVisibility } from '@/composables/use-toggle-password';
 
   const { submitForm, errors, email, password } = useLoginForm();
-  const { isPasswordVisible, togglePasswordVisibility} = handleTogglePasswordVisibility()
+  const { isPasswordVisible, togglePasswordVisibility} = useTogglePasswordVisibility()
 </script>
