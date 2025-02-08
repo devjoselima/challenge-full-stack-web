@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/store/auth";
+
 import { api } from "./axios"
 
 interface CreateStudentBody {
@@ -9,14 +9,6 @@ interface CreateStudentBody {
 }
 
 export const createStudent = async ({ ra, name, email, cpf }: CreateStudentBody) => {
-  const authStore = useAuthStore();
-  const token = authStore.token;
-
-  const response = await api.post('/students', { ra, name, email, cpf }, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
+  const response = await api.post('/students', { ra, name, email, cpf });
   return response.data;
 }
