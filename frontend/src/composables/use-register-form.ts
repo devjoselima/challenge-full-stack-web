@@ -3,10 +3,12 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useAuthStore } from '@/store/auth'
 import { useRouter } from "vue-router";
+import { useToastStore } from "@/store/toastStore";
 
 export const useRegisterForm = () => {
   const authStore = useAuthStore()
   const router = useRouter()
+  const toastStore = useToastStore();
 
   const registerSchema = toTypedSchema(
     z.object({
@@ -26,6 +28,7 @@ export const useRegisterForm = () => {
 
   const submitForm = handleSubmit(async (values) => {
     await authStore.register(values.name, values.email, values.password) 
+    toastStore.clearToastMessage();
     router.push('/')   
   })
 
