@@ -25,7 +25,12 @@
           <v-btn type="submit" color="primary" block>Cadastrar</v-btn>
           <div class="text-center">
             <span>Ja possui uma conta? </span>
-            <a href="/login">Entre agora!</a>
+             <span 
+              class="text-primary text-decoration-underline cursor-pointer hover:text-blue-darken-2" 
+              @click="$router.push('/login')"
+            >
+              Entre agora!
+            </span>
           </div>
         </v-form>
       </v-card-text>
@@ -34,13 +39,9 @@
 </template>
 
 <script setup>
-  import { ref } from "vue";
   import { useRegisterForm } from '@/composables/use-register-form';
-
-  const isPasswordVisible = ref(false);
+  import { handleTogglePasswordVisibility} from '@/utils/toggle-password';
   const { submitForm, errors, name, email, password } = useRegisterForm();
 
-  const togglePasswordVisibility = () => {
-    isPasswordVisible.value = !isPasswordVisible.value;
-  };
+  const { isPasswordVisible, togglePasswordVisibility} = handleTogglePasswordVisibility()
 </script>

@@ -13,12 +13,19 @@
             label="Senha"
             v-model="password"
             :error-messages="errors.password"
-            type="password"
+            :type="isPasswordVisible ? 'text' : 'password'" 
+            :append-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append="togglePasswordVisibility"
           />
           <v-btn type="submit" color="primary" block>Entrar</v-btn>
           <div class="text-center">
             <span>Ainda não tem uma conta? </span>
-            <a href="/register">Crie uma agora!</a>
+            <span 
+              class="text-primary text-decoration-underline cursor-pointer hover:text-blue-darken-2" 
+              @click="$router.push('/register')"
+            >
+              Crie uma agora!
+            </span>
           </div>
         </v-form>
       </v-card-text>
@@ -28,5 +35,8 @@
 
 <script setup>
   import { useLoginForm } from '@/composables/use-login-form';
+  import { handleTogglePasswordVisibility} from '@/utils/toggle-password';
+
   const { submitForm, errors, email, password } = useLoginForm();
+  const { isPasswordVisible, togglePasswordVisibility} = handleTogglePasswordVisibility()
 </script>
