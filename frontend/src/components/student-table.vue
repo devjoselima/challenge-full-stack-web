@@ -66,6 +66,20 @@ const fetchStudents = async () => {
   }
 };
 
+const resetPagination = () => {
+  pagination.value.page = 1;
+  fetchStudents();
+};
+
+watch(
+  () => props.search,
+  (newSearch, oldSearch) => {
+    if (newSearch !== oldSearch) {
+      resetPagination();
+    }
+  }
+);
+
 watch([() => pagination.value.page, () => props.search], fetchStudents, { immediate: true });
 
 onMounted(fetchStudents);
