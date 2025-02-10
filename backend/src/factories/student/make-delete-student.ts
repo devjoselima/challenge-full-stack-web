@@ -1,4 +1,4 @@
-import { DeleteStudentController } from "@/http/controllers/student/delete-student";
+import { DeleteStudentController } from "@/http/controllers/student";
 import { PrismaStudentsRepository } from "@/repository/prisma-student-repository";
 import { DeleteStudentUseCase } from "@/use-cases";
 

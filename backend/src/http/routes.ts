@@ -1,17 +1,18 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import {
-  PaginateStudentsController,
-  UpdateStudentController
+  PaginateStudentsController
 } from "./controllers/";
 import { makeCreateUserController, makeAuthenticateController } from "@/factories/user";
-import { makeCreateStudentController, makeDeleteStudentController } from "@/factories/student";
+import { makeCreateStudentController, makeDeleteStudentController, makeUpdateStudentController } from "@/factories/student";
 
 export async function appRoutes(app: FastifyInstance) {
   app.get("/students", PaginateStudentsController);
   app.post("/students", (request: FastifyRequest, reply: FastifyReply) => {
     return makeCreateStudentController().execute(request, reply);
   });
-  app.patch("/students/:ra", UpdateStudentController);
+  app.patch("/students/:ra", (request: FastifyRequest, reply: FastifyReply) => {
+    return makeUpdateStudentController().execute(request, reply);
+  });
   app.delete("/students/:ra", (request: FastifyRequest, reply: FastifyReply) => {
     return makeDeleteStudentController().execute(request, reply)
   });
