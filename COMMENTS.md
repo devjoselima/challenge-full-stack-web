@@ -1,7 +1,7 @@
 ## Decisões sobre a arquitetura
 ### Backend
 #### Visão geral
-A API foi desenvolvida seguindo os princípios da **Clean Architecture**, garantindo um código bem estruturado, de fácil manuntenção e escalável. Além disso, os princípios **Dependency Inversion Principle (DIP)** e **Open/Closed Principle (OCP)** do SOLID foram aplicados para promover desacoplamento e responsabilidade única.
+A API foi desenvolvida seguindo os princípios da **Clean Architecture**, garantindo um código bem estruturado, de fácil manutenção e escalável. Além disso, os princípios **Dependency Inversion Principle (DIP)** e **Open/Closed Principle (OCP)** do SOLID foram aplicados para promover desacoplamento e responsabilidade única.
 
 A arquitetura está dividida nas seguintes camadas:
 #### 1. Controllers
@@ -22,7 +22,7 @@ Os **Use Cases** representam a lógica de negócio da aplicação, garantindo qu
 #### 3. Repositories
 Os **Repositories** são responsáveis por interagir com o banco de dados ou outras fontes de dados externas. Eles encapsulam a lógica de acesso a dados e expõem apenas métodos necessários para os **Use Cases**.
 
-**Reponsabilidades**
+**Responsabilidades**
 - Abstrair o acesso aos dados.
 - Garantir a persistência correta da informação.
 
@@ -31,7 +31,7 @@ As **Factories** são utilizadas para montar os **Controllers**, garantindo a in
 
 **Responsabilidades**
 - Criar instâncias dos controllers, repositories, use cases e adapters.
-- Passar via injeção de depedencia suas instâncias corretamente.
+- Passar via injeção de dependência suas instâncias corretamente.
 
 #### 5. Adapters
 Os **Adapters** atuam como intermediários entre a aplicação e dependências externas, garantindo que as interfaces se mantenham consistentes e que o código siga o princípio **Open/Closed Principle** do SOLID. Isso significa que podemos modificar ou substituir uma dependência externa sem alterar o código da aplicação principal.
@@ -41,7 +41,7 @@ Os **Adapters** atuam como intermediários entre a aplicação e dependências e
 - Permitir substituições futuras sem alterar o código principal.
 
 #### 6. Middlewares
-Os **Middlewares** são utilizados para tratar requisições antes de chegarem ao **Controller**, como autenticação, loggind e validação.
+Os **Middlewares** são utilizados para tratar requisições antes de chegarem ao **Controller**, como autenticação, login e validação.
 
 **Responsabilidades:**
 - Autenticar rotas para garantir que o usuário que esta tentando acessar esteja permitido.
@@ -49,13 +49,13 @@ Os **Middlewares** são utilizados para tratar requisições antes de chegarem a
 
 ### Frontend
 #### Visão geral
-A estrutura foi  desenhada afim de atender e seguir princípios de **Clean Architecture** boas práticas e princípios SOLID como **Single Responsability Principle (SRP)**.
+A estrutura foi  desenhada a fim de atender e seguir princípios de **Clean Architecture** boas práticas e princípios SOLID como **Single Responsability Principle (SRP)**.
 
 #### 1. Components
 Os componentes são responsáveis por exibir a interface do usuário. Eles devem ser pequenos e reutilizáveis. Cada componente pode consumir dados da **store** ou chamar funções de **composables**.
 
 #### 2. Composables
-Os composables fornecem uma lógica reutilizável, como manipulação de estados, formulários, lógica de API, etc
+Os composables fornecem uma lógica reutilizável, como manipulação de estados, formulários, lógica de API, etc.
 
 **Exemplo:**
 - **useStudentForm:** Lógica de validação do formulário de um aluno.
@@ -71,7 +71,7 @@ Aqui utilizamos o **Vue Router**, ele lida com o roteamento entre as páginas de
 
 ## Principios SOLID Aplicados
 #### 1. Dependency Inversion Principle (DIP)
-A inversão de dependências é aplicada por meio de injeção de dependências garantindo que os módulos superiores não dependam diretamento dos módulos inferiores
+A inversão de dependências é aplicada por meio de injeção de dependências garantindo que os módulos superiores não dependam diretamente dos módulos inferiores
 
 **Exemplo**
 - O **CreateStudentController** recebe o **CreateStudentUseCase** por meio de injeção de dependências.
@@ -81,13 +81,13 @@ A inversão de dependências é aplicada por meio de injeção de dependências 
 Esse princípio afirma que uma classe ou módulo deve ser aberto para extensão mas fechado para modificação.
 
 **Exemplo**
-- Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que caso um desses recursos mudem não precisemos altera-lo.
+- Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que, caso um desses recursos mude, não precisemos altera-lo.
 
 #### 3. Single Responsability Principle (SRP)
-Esse princípio afirma que classe ou módulo deve ter apenas uma razão para mudar, ou seja, cada classe deve ter uma única responsabilidade 
+Esse princípio afirma que uma classe ou módulo deve ter apenas uma razão para mudar, ou seja, cada classe deve ter uma única responsabilidade 
 
 **Exemplo**
-- O **CreateStudentController** tem a responsabilidade de lidar com requisições HTTP e não realiza nenhuma loógica das regras de negócio da aplicação. Essa lógica fica no **CreateStudentUseCase** ele fica responsável por **apenas** validar as regras de negócio.
+- O **CreateStudentController** tem a responsabilidade de lidar com requisições HTTP e não realiza nenhuma lógica das regras de negócio da aplicação. Essa lógica fica no **CreateStudentUseCase** ele fica responsável por **apenas** validar as regras de negócio.
 - Dessa forma, caso haja uma alteração nas regras de negócio **apenas** será necessário mexer no **use case**, agora se precisarmos mexer na conexão com o banco mexemos **apenas** no **repository**.
 
 **Exemplo**
@@ -132,7 +132,7 @@ Esse princípio afirma que classe ou módulo deve ter apenas uma razão para mud
     - Criação de **testes e2e** para validação de fluxos completos do usuário.
 3. Gerenciamento de Roles e Permissões 
     - Implementação de um **controle de acesso baseado em roles (RBAC)**.
-    - Garantir que certar páginas e funcionalidades sejam acessíveis apenas para usuários autorizados.
+    - Garantir que certas páginas e funcionalidades sejam acessíveis apenas para usuários autorizados.
 
 ## Instruções para rodar o projeto
 - Instruções para o back end [aqui](backend/README.md)
