@@ -1,5 +1,4 @@
 <template>
-  <!-- <Header /> -->
   <StudentToolbar v-model:search="search"/>
   <StudentTable :search="search" />
 </template>
@@ -7,8 +6,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { toast } from 'vue3-toastify';
-
-  import Header from '@/components/header.vue';
+  
   import StudentToolbar from '@/components/student-toolbar.vue';
   import StudentTable from '@/components/student-table.vue';
 
