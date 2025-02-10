@@ -3,7 +3,7 @@ import {
   StudentEmailAlreadyExistsError,
   StudentRaAlreadyExistsError,
 } from "@/errors";
-import { IStudentRepository } from "@/repositories/student-repository";
+import { IStudentRepository } from "@/repositories/interfaces/student-repository";
 
 interface CreateStudentUseCaseRequest {
   name: string;

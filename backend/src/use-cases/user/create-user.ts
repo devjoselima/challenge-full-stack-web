@@ -1,5 +1,5 @@
 import { UserAlreadyExistsError } from "@/errors/user-already-exists";
-import { IUserRepository } from "@/repositories/user-repository";
+import { IUserRepository } from "@/repositories/interfaces/user-repository";
 import { PasswordHasherAdapter } from "@/adapters/password-hasher";
 
 interface CreateUserBody {

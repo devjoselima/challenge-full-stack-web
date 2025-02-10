@@ -1,4 +1,4 @@
-import { IStudentRepository } from "@/repositories/student-repository";
+import { IStudentRepository } from "@/repositories/interfaces/student-repository";
 
 export class PaginateStudentsUseCase {
   constructor(private studentsRepository: IStudentRepository) {}

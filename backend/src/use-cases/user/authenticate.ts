@@ -1,6 +1,6 @@
 import { PasswordCompareAdapter } from "@/adapters/password-compare";
 import { InvalidCredentialsError } from "@/errors";
-import { IUserRepository } from "@/repositories/user-repository";
+import { IUserRepository } from "@/repositories/interfaces/user-repository";
 import { User } from "@prisma/client";
 
 interface AuthenticateUseCaseRequest {
