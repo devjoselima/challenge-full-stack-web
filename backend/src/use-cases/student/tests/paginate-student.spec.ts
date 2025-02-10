@@ -1,6 +1,6 @@
 import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
 import { beforeEach, describe, expect, it } from "vitest";
-import { PaginateStudentsUseCase } from "./paginate-students";
+import { PaginateStudentsUseCase } from "@/use-cases/student";
 
 let studentRepository: InMemoryStudentRepository;
 let sut: PaginateStudentsUseCase;

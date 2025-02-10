@@ -1,6 +1,6 @@
 import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
 import { beforeEach, describe, expect, it, test } from "vitest";
-import { CreateStudentUseCase } from "./create-student";
+import { CreateStudentUseCase } from "@/use-cases/student";
 import {
   StudentCpfAlreadyExistsError,
   StudentEmailAlreadyExistsError,

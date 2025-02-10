@@ -1,6 +1,6 @@
 import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
 import { beforeEach, describe, expect, it } from "vitest";
-import { UpdateStudentUseCase } from "./update-student";
+import { UpdateStudentUseCase } from "@/use-cases/student";
 import { StudentNotFoundError, StudentEmailAlreadyExistsError } from "@/errors";
 
 let studentRepository: InMemoryStudentRepository;

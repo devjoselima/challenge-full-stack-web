@@ -1,6 +1,6 @@
 import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
-import { beforeEach, describe, expect, it, test } from "vitest";
-import { DeleteStudentUseCase } from "./delete-student";
+import { beforeEach, describe, expect, it } from "vitest";
+import { DeleteStudentUseCase } from "@/use-cases/student";
 import { StudentNotFoundError } from "@/errors";
 
 let studentRepository: InMemoryStudentRepository;

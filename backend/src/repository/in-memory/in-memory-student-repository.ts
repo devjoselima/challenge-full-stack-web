@@ -39,11 +39,8 @@ export class InMemoryStudentRepository implements IStudentRepository {
   }
 
   async delete(ra: string) {
-    const deletedStudent = this.students.find((student) => student.ra === ra);
-    if (!deletedStudent) {
-      return null;
-    }
-
+    const index = this.students.findIndex((student) => student.ra === ra);
+    const [deletedStudent] = this.students.splice(index, 1);
     return deletedStudent;
   }
 

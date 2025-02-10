@@ -1,7 +1,7 @@
 import { PasswordCompareAdapter } from "@/adapters/password-compare";
 import { InvalidCredentialsError } from "@/errors";
 import { InMemoryUserRepository } from "@/repository/in-memory/in-memory-user-repository";
-import { AuthenticateUseCase } from "./authenticate";
+import { AuthenticateUseCase } from "@/use-cases/user";
 import { beforeEach, describe, expect, it } from "vitest";
 import { hash } from "bcryptjs";
 

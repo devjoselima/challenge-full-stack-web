@@ -1,6 +1,6 @@
 import { InMemoryUserRepository } from "@/repository/in-memory/in-memory-user-repository";
 import { PasswordHasherAdapter } from "@/adapters/password-hasher";
-import { CreateUserUseCase } from "./create-user";
+import { CreateUserUseCase } from "@/use-cases/user";
 import { UserAlreadyExistsError } from "@/errors/user-already-exists";
 import { beforeEach, describe, expect, it } from "vitest";
 
