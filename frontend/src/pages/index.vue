@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <!-- <Header /> -->
   <StudentToolbar v-model:search="search"/>
   <StudentTable :search="search" />
 </template>

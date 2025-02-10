@@ -2,8 +2,8 @@
   <SideBar v-model="isDrawerOpen" />
 
   <v-app-bar flat class="border-b">
-    <v-app-bar-nav-icon @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
-    <v-app-bar-title>Consulta de alunos</v-app-bar-title>
+    <v-app-bar-nav-icon @click="isDrawerOpen = !isDrawerOpen" />
+    <v-app-bar-title>Painel de alunos</v-app-bar-title>
     <v-tooltip text="Sair" location="bottom">
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" @click="handleLogout">
