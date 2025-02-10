@@ -1,5 +1,5 @@
-import { PrismaUserRepository } from "@/repository/prisma-user-repository";
-import { AuthenticateUseCase } from "@/use-cases";
+import { PrismaUserRepository } from "@/repositories/prisma-user-repository";
+import { AuthenticateUseCase } from "@/use-cases/user";
 import { PasswordCompareAdapter } from "@/adapters";
 import { AuthenticateController } from "@/http/controllers/user";
 

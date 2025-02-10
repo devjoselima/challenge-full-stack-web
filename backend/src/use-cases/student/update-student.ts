@@ -1,5 +1,5 @@
 import { StudentNotFoundError, StudentEmailAlreadyExistsError } from "@/errors";
-import { IStudentRepository } from "@/repository/student-repository";
+import { IStudentRepository } from "@/repositories/student-repository";
 
 interface UpdateStudentUseCaseRequest {
   ra: string;

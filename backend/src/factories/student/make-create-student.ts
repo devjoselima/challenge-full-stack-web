@@ -1,6 +1,6 @@
 import { CreateStudentController } from "@/http/controllers/student";
-import { PrismaStudentsRepository } from "@/repository/prisma-student-repository";
-import { CreateStudentUseCase } from "@/use-cases";
+import { PrismaStudentsRepository } from "@/repositories/prisma-student-repository";
+import { CreateStudentUseCase } from "@/use-cases/student";
 
 export const makeCreateStudentController = () => {
   const studentRepository = new PrismaStudentsRepository();

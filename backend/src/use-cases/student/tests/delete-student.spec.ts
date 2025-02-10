@@ -1,4 +1,4 @@
-import { InMemoryStudentRepository } from "@/repository/in-memory/in-memory-student-repository";
+import { InMemoryStudentRepository } from "@/repositories/in-memory/in-memory-student-repository";
 import { beforeEach, describe, expect, it } from "vitest";
 import { DeleteStudentUseCase } from "@/use-cases/student";
 import { StudentNotFoundError } from "@/errors";

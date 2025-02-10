@@ -1,6 +1,6 @@
-import { PrismaUserRepository } from "@/repository/prisma-user-repository";
+import { PrismaUserRepository } from "@/repositories/prisma-user-repository";
 import { PasswordHasherAdapter } from "@/adapters/password-hasher";
-import { CreateUserUseCase } from "@/use-cases";
+import { CreateUserUseCase } from "@/use-cases/user";
 import { CreateUserController } from "@/http/controllers/user";
 
 export const makeCreateUserController = () => {
