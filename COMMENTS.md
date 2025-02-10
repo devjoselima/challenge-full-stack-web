@@ -113,6 +113,7 @@ Esse princípio afirma que uma classe ou módulo deve ter apenas uma razão para
 - **faker.js:** Biblioteca para geração de dados fictícios, como nomes e e-mails
  
 ## Melhorias
+> Como se trata de um teste técnico, realizei os commits diretamente na branch principal para agilizar a entrega. Entretanto, em um ambiente real, utilizaria um fluxo Git baseado em branches feature e PRs para revisão de código.
 #### Backend
 1. Autenticação com Refresh Tokens
    - Aprimorar a autenticação utilizando **refresh tokens** para evitar que os usuários precisem fazer login com frequência
@@ -141,4 +142,3 @@ Esse princípio afirma que uma classe ou módulo deve ter apenas uma razão para
 
 ## Requisitos obrigatórios não entregues
 Todos os requisitos obrigatórios foram entregues.
-> Como se trata de um teste técnico, realizei os commits diretamente na branch principal para agilizar a entrega. Entretanto, em um ambiente real, utilizaria um fluxo Git baseado em branches feature e PRs para revisão de código.
