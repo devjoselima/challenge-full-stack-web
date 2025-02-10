@@ -135,8 +135,8 @@ Esse princípio afirma que classe ou módulo deve ter apenas uma razão para mud
     - Garantir que certar páginas e funcionalidades sejam acessíveis apenas para usuários autorizados.
 
 ## Instruções para rodar o projeto
-Instruções para o back end [aqui](backend/README.md)
-Instruções para o front end [aqui](frontend/README.md)
+- Instruções para o back end [aqui](backend/README.md)
+- Instruções para o front end [aqui](frontend/README.md)
 
 ## Requisitos obrigatórios não entregues
 Todos os requisitos obrigatórios foram entregues.
