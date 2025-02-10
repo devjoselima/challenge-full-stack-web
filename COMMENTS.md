@@ -138,5 +138,7 @@ Esse princípio afirma que uma classe ou módulo deve ter apenas uma razão para
 - Instruções para o back end [aqui](backend/README.md)
 - Instruções para o front end [aqui](frontend/README.md)
 
+
 ## Requisitos obrigatórios não entregues
 Todos os requisitos obrigatórios foram entregues.
+> Como se trata de um teste técnico, realizei os commits diretamente na branch principal para agilizar a entrega. Entretanto, em um ambiente real, utilizaria um fluxo Git baseado em branches feature e PRs para revisão de código.
