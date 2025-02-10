@@ -32,12 +32,7 @@ router.onError((err, to) => {
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const isAuthenticated = authStore.isAuthenticated
-  const loginPath = to.path === '/login'
   const initialPath = to.path === '/'
-
-  if (loginPath && isAuthenticated) {
-    next('/')
-  }
 
   if (initialPath && !isAuthenticated) {
     next('/login')
