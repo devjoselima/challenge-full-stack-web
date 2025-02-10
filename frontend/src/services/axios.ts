@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAuthStore } from "@/store/auth";
+import router from "@/router";
 
 const API_BASE_URL = "http://localhost:3333/";
 
@@ -19,3 +20,15 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      const authStore = useAuthStore();
+      authStore.logout();
+      router.push("/login");
+    }
+    return Promise.reject(error);
+  }
+);
