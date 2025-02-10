@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 import { StudentEmailAlreadyExistsError, StudentNotFoundError } from "@/errors";
-import { UpdateStudentUseCase } from "@/use-cases";
+import { UpdateStudentUseCase } from "@/use-cases/student";
 
 export class UpdateStudentController {
   constructor(private updateStudentUseCase: UpdateStudentUseCase) {}

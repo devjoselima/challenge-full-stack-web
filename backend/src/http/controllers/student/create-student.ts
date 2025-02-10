@@ -5,7 +5,7 @@ import {
   StudentEmailAlreadyExistsError,
   StudentCpfAlreadyExistsError,
 } from "@/errors";
-import { CreateStudentUseCase } from "@/use-cases";
+import { CreateStudentUseCase } from "@/use-cases/student";
 
 export class CreateStudentController {
   constructor(private createStudentUseCase: CreateStudentUseCase) {}

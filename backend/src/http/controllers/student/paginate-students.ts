@@ -1,4 +1,4 @@
-import { PaginateStudentsUseCase } from "@/use-cases";
+import { PaginateStudentsUseCase } from "@/use-cases/student";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

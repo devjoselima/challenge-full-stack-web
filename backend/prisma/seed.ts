@@ -1,5 +1,5 @@
 import { PrismaClient, Student } from '@prisma/client';
-import { faker, fakerPT_BR } from '@faker-js/faker';
+import { fakerPT_BR } from '@faker-js/faker';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();

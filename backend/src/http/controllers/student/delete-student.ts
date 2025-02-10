@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 import { StudentNotFoundError } from "@/errors";
-import { DeleteStudentUseCase } from "@/use-cases";
+import { DeleteStudentUseCase } from "@/use-cases/student";
 
 export class DeleteStudentController {
   constructor(private deleteStudentUseCase: DeleteStudentUseCase) {}
