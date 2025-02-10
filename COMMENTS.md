@@ -74,24 +74,24 @@ Aqui utilizamos o **Vue Router**, ele lida com o roteamento entre as páginas de
 A inversão de dependências é aplicada por meio de injeção de dependências garantindo que os módulos superiores não dependam diretamento dos módulos inferiores
 
 **Exemplo**
-1.1. O **CreateStudentController** recebe o **CreateStudentUseCase** por meio de injeção de dependências.
-1.2. Com isso o **Controller** não possui conhecimento direto de outras camadas, apenas depende de uma abstração que define o comportamento esperado.
+- O **CreateStudentController** recebe o **CreateStudentUseCase** por meio de injeção de dependências.
+- Com isso o **Controller** não possui conhecimento direto de outras camadas, apenas depende de uma abstração que define o comportamento esperado.
 
 #### 2. Open/Closed Principle (OCP)
 Esse princípio afirma que uma classe ou módulo deve ser aberto para extensão mas fechado para modificação.
 
 **Exemplo**
-2.1. Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que caso um desses recursos mudem não precisemos altera-lo.
+- Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que caso um desses recursos mudem não precisemos altera-lo.
 
 #### 3. Single Responsability Principle (SRP)
 Esse princípio afirma que classe ou módulo deve ter apenas uma razão para mudar, ou seja, cada classe deve ter uma única responsabilidade 
 
 **Exemplo**
-3.1. O **CreateStudentController** tem a responsabilidade de lidar com requisições HTTP e não realiza nenhuma loógica das regras de negócio da aplicação. Essa lógica fica no **CreateStudentUseCase** ele fica responsável por **apenas** validar as regras de negócio.
-3.2. Dessa forma, caso haja uma alteração nas regras de negócio apenas será necessário mexer no **use case**, agora se precisarmos mexer na conexão com o banco mexemos apenas no **repository**.
+- O **CreateStudentController** tem a responsabilidade de lidar com requisições HTTP e não realiza nenhuma loógica das regras de negócio da aplicação. Essa lógica fica no **CreateStudentUseCase** ele fica responsável por **apenas** validar as regras de negócio.
+- Dessa forma, caso haja uma alteração nas regras de negócio **apenas** será necessário mexer no **use case**, agora se precisarmos mexer na conexão com o banco mexemos **apenas** no **repository**.
 
 **Exemplo**
-2.1. Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que caso um desses recursos mudem não precisemos altera-lo.
+- Por meio dos **Adapters** garantimos que o código principal não dependa de recursos externos, ou seja garantimos que caso um desses recursos mudem não precisemos altera-lo.
 
 ## Bibliotecas
 - **vue.js:** Framework Javascript progressivo para contrução de interfaces de usuário.
