@@ -2,6 +2,10 @@
 ## 📌 Sobre o projeto
 Esta projeto foi desenvolvido com **Vue.js**, **Vuetify** e **TypeScript**. Ele inclui autenticação salvando um token **JWT**, validação de formulários com **Zod** e CRUD de alunos.
 
+## 📹 Preview
+![preview](https://github.com/user-attachments/assets/8bfb198b-f5cb-4f59-aa98-bfe84c71eb1d)
+
+
 ## Requisitos
 - Node.js (v20)
 - npm, yarn ou algum package manager
